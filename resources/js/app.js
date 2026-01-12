@@ -1,12 +1,27 @@
 import './bootstrap'
 import { createApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/vue3'
+import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
+import { createPinia } from 'pinia'
+import { useDarkModeStore } from './stores/darkMode'
+
+const appName = import.meta.env.VITE_APP_NAME || 'Laravel'
+const pinia = createPinia()
 
 createInertiaApp({
-  resolve: (name) => import(`./pages/${name}.vue`),
+  title: (title) => (title ? `${title} - ${appName}` : appName),
+  resolve: (name) =>
+    resolvePageComponent(
+      `./pages/${name}.vue`,
+      import.meta.glob('./pages/**/*.vue'),
+    ),
   setup({ el, App, props, plugin }) {
     createApp({ render: () => h(App, props) })
       .use(plugin)
+      .use(pinia)
       .mount(el)
   },
+  progress: { color: '#4B5563' },
 })
+
+useDarkModeStore(pinia).init()
