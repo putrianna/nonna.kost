@@ -40,9 +40,6 @@ const isMenuNavBarActive = ref(false)
         class="absolute top-14 left-0 max-h-[calc(100dvh-(--spacing(14)))] w-screen overflow-y-auto bg-gray-50 shadow-lg lg:static lg:flex lg:w-auto lg:overflow-visible lg:shadow-none dark:bg-slate-800"
         :class="[isMenuNavBarActive ? 'block' : 'hidden']"
       >
-        <div class="flex items-center px-3 py-2">
-          <PremiumVersionBadge />
-        </div>
         <NavBarMenuList :menu="menu" @menu-click="menuClick" />
       </div>
     </div>

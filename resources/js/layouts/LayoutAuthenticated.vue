@@ -73,11 +73,7 @@ const menuClick = (event, item) => {
         @aside-lg-close-click="isAsideLgActive = false"
       />
       <slot />
-      <FooterBar>
-        <div class="flex items-center justify-center lg:justify-start">
-          <PremiumVersionBadge />
-        </div>
-      </FooterBar>
+      <FooterBar />
     </div>
   </div>
 </template>

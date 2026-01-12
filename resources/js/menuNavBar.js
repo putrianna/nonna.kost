@@ -22,10 +22,6 @@ export default [
         label: 'Settings',
       },
       {
-        icon: mdiEmail,
-        label: 'Messages',
-      },
-      {
         isDivider: true,
       },
       {
@@ -40,20 +36,6 @@ export default [
     label: 'Light/Dark',
     isDesktopNoLabel: true,
     isToggleLightDark: true,
-  },
-  {
-    icon: mdiGithub,
-    label: 'GitHub',
-    isDesktopNoLabel: true,
-    href: 'https://github.com/justboil/admin-one-vue-tailwind',
-    target: '_blank',
-  },
-  {
-    icon: mdiReact,
-    label: 'React version',
-    isDesktopNoLabel: true,
-    href: 'https://github.com/justboil/admin-one-react-tailwind',
-    target: '_blank',
   },
   {
     icon: mdiLogout,

@@ -44,18 +44,6 @@ const transactionBarItems = computed(() => mainStore.history);
 <template>
   <LayoutAuthenticated>
     <SectionMain>
-      <SectionTitleLineWithButton :icon="mdiChartTimelineVariant" title="Overview" main>
-        <BaseButton
-          href="https://github.com/justboil/admin-one-vue-tailwind"
-          target="_blank"
-          :icon="mdiGithub"
-          label="Star on GitHub"
-          color="contrast"
-          rounded-full
-          small
-        />
-      </SectionTitleLineWithButton>
-
       <div class="mb-6 grid grid-cols-1 gap-6 lg:grid-cols-3">
         <CardBoxWidget
           trend="12%"
@@ -109,8 +97,6 @@ const transactionBarItems = computed(() => mainStore.history);
           />
         </div>
       </div>
-
-      <SectionBannerStarOnGitHub class="mb-6 mt-6" />
 
       <SectionTitleLineWithButton :icon="mdiChartPie" title="Trends overview">
         <BaseButton :icon="mdiReload" color="whiteDark" @click="fillChartData" />
