@@ -1,19 +1,15 @@
 <script setup>
-import BaseButton from '../components/BaseButton.vue';
-import BaseButtons from '../components/BaseButtons.vue';
-import BaseDivider from '../components/BaseDivider.vue';
-import BaseLevel from '../components/BaseLevel.vue';
-import CardBox from '../components/CardBox.vue';
-import FormCheckRadioGroup from '../components/FormCheckRadioGroup.vue';
-import FormControl from '../components/FormControl.vue';
-import FormField from '../components/FormField.vue';
-import FormValidationErrors from '../components/FormValidationErrors.vue';
-import NotificationBarInCard from '../components/NotificationBarInCard.vue';
-import SectionFullScreen from '../components/SectionFullScreen.vue';
-import LayoutGuest from '../layouts/LayoutGuest.vue';
-import { register } from '@/routes';
-import login from '@/routes/login';
-import password from '@/routes/password';
+import BaseButton from '@/components/BaseButton.vue';
+import BaseButtons from '@/components/BaseButtons.vue';
+import BaseDivider from '@/components/BaseDivider.vue';
+import BaseLevel from '@/components/BaseLevel.vue';
+import CardBox from '@/components/CardBox.vue';
+import FormCheckRadioGroup from '@/components/FormCheckRadioGroup.vue';
+import FormControl from '@/components/FormControl.vue';
+import FormField from '@/components/FormField.vue';
+import NotificationBarInCard from '@/components/NotificationBarInCard.vue';
+import SectionFullScreen from '@/components/SectionFullScreen.vue';
+import LayoutGuest from '@/layouts/LayoutGuest.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import { mdiAccount, mdiAsterisk } from '@mdi/js';
 
@@ -26,7 +22,7 @@ const props = defineProps({
 });
 
 const form = useForm({
-  email: '',
+  login: '',
   password: '',
   remember: [],
 });
@@ -37,7 +33,7 @@ const submit = () => {
       ...data,
       remember: form.remember && form.remember.length ? 'on' : '',
     }))
-    .post(login.store().url, {
+    .post(route('login'), {
       onFinish: () => form.reset('password'),
     });
 };
@@ -49,24 +45,23 @@ const submit = () => {
 
     <SectionFullScreen v-slot="{ cardClass }" bg="purplePink">
       <CardBox :class="cardClass" is-form @submit.prevent="submit">
-        <FormValidationErrors />
-
-        <NotificationBarInCard v-if="status" color="info">
-          {{ status }}
+        <NotificationBarInCard color="info">
+          Authentication Required 😌
         </NotificationBarInCard>
 
-        <FormField label="Email" label-for="email" help="Please enter your email">
+        <FormField label="Email or Username" label-for="login" help="Please enter your email or username" :error="form.errors.login">
           <FormControl
-            v-model="form.email"
+            v-model="form.login"
             :icon="mdiAccount"
-            id="email"
-            autocomplete="email"
-            type="email"
+            id="login"
+            autocomplete="login"
+            type="text"
             required
+            autofocus
           />
         </FormField>
 
-        <FormField label="Password" label-for="password" help="Please enter your password">
+        <FormField label="Password" label-for="password" help="Please enter your password" :error="form.errors.password">
           <FormControl
             v-model="form.password"
             :icon="mdiAsterisk"
@@ -96,13 +91,13 @@ const submit = () => {
             />
             <BaseButton
               v-if="canResetPassword"
-              :route="password.request()"
+              :href="route('password.request')"
               color="info"
               outline
               label="Remind"
             />
           </BaseButtons>
-          <Link :href="register()"> Register </Link>
+          <!-- <Link :href="route('register')"> Register </Link> -->
         </BaseLevel>
       </CardBox>
     </SectionFullScreen>

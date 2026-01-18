@@ -1,18 +1,16 @@
 <script setup>
-import BaseButton from '../components/BaseButton.vue';
-import BaseDivider from '../components/BaseDivider.vue';
-import BaseLevel from '../components/BaseLevel.vue';
-import CardBox from '../components/CardBox.vue';
-import FormControl from '../components/FormControl.vue';
-import FormField from '../components/FormField.vue';
-import FormValidationErrors from '../components/FormValidationErrors.vue';
-import NotificationBarInCard from '../components/NotificationBarInCard.vue';
-import SectionFullScreen from '../components/SectionFullScreen.vue';
-import LayoutGuest from '../layouts/LayoutGuest.vue';
-import { login } from '@/routes';
-import password from '@/routes/password';
+import BaseButton from '@/components/BaseButton.vue';
+import BaseDivider from '@/components/BaseDivider.vue';
+import BaseLevel from '@/components/BaseLevel.vue';
+import CardBox from '@/components/CardBox.vue';
+import FormControl from '@/components/FormControl.vue';
+import FormField from '@/components/FormField.vue';
+import NotificationBarInCard from '@/components/NotificationBarInCard.vue';
+import SectionFullScreen from '@/components/SectionFullScreen.vue';
+import LayoutGuest from '@/layouts/LayoutGuest.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import { mdiEmail } from '@mdi/js';
+import { route } from 'ziggy-js';
 
 defineProps({
   status: {
@@ -26,7 +24,7 @@ const form = useForm({
 });
 
 const submit = () => {
-  form.post(password.email().url);
+  form.post(route('password.email'));
 };
 </script>
 
@@ -36,7 +34,6 @@ const submit = () => {
 
     <SectionFullScreen v-slot="{ cardClass }" bg="purplePink">
       <CardBox :class="cardClass" is-form @submit.prevent="submit">
-        <FormValidationErrors />
 
         <NotificationBarInCard v-if="status" color="info">
           {{ status }}
@@ -49,7 +46,7 @@ const submit = () => {
           </div>
         </FormField>
 
-        <FormField label="Email" help="Please enter your email">
+        <FormField label="Email" help="Please enter your email" :error="form.errors.email">
           <FormControl
             v-model="form.email"
             :icon="mdiEmail"
@@ -69,7 +66,7 @@ const submit = () => {
             :class="{ 'opacity-25': form.processing }"
             :disabled="form.processing"
           />
-          <Link :href="login()"> Back to login </Link>
+          <Link :href="route('login')"> Back to login </Link>
         </BaseLevel>
       </CardBox>
     </SectionFullScreen>

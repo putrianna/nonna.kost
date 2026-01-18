@@ -15,7 +15,7 @@ export default [
       {
         icon: mdiAccount,
         label: 'My Profile',
-        to: '/profile',
+        href: route('profile.edit'),
       },
       {
         icon: mdiCogOutline,
@@ -36,11 +36,5 @@ export default [
     label: 'Light/Dark',
     isDesktopNoLabel: true,
     isToggleLightDark: true,
-  },
-  {
-    icon: mdiLogout,
-    label: 'Log out',
-    isDesktopNoLabel: true,
-    isLogout: true,
-  },
+  }
 ]

@@ -2,16 +2,15 @@
 import { mdiForwardburger, mdiBackburger, mdiMenu } from '@mdi/js'
 import { ref } from 'vue'
 import { router } from '@inertiajs/vue3'
-import { menuAsideMain, menuAsideBottom } from '../menuAside.js'
-import menuNavBar from '../menuNavBar.js'
-import { useDarkModeStore } from '../stores/darkMode.js'
-import BaseIcon from '../components/BaseIcon.vue'
-import FormControl from '../components/FormControl.vue'
-import NavBar from '../components/NavBar.vue'
-import NavBarItemPlain from '../components/NavBarItemPlain.vue'
-import AsideMenu from '../components/AsideMenu.vue'
-import FooterBar from '../components/FooterBar.vue'
-import PremiumVersionBadge from '../components/PremiumVersionBadge.vue'
+import { menuAsideMain, menuAsideBottom } from '@/menuAside.js'
+import menuNavBar from '@/menuNavBar.js'
+import { useDarkModeStore } from '@/stores/darkMode.js'
+import BaseIcon from '@/components/BaseIcon.vue'
+import FormControl from '@/components/FormControl.vue'
+import NavBar from '@/components/NavBar.vue'
+import NavBarItemPlain from '@/components/NavBarItemPlain.vue'
+import AsideMenu from '@/components/AsideMenu.vue'
+import FooterBar from '@/components/FooterBar.vue'
 
 const layoutAsidePadding = 'xl:pl-60'
 
@@ -31,7 +30,7 @@ const menuClick = (event, item) => {
   }
 
   if (item.isLogout) {
-    alert('Logout clicked')
+    router.post(route('logout'))
   }
 }
 </script>

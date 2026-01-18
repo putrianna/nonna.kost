@@ -7,7 +7,6 @@ import CardBoxWidget from '../components/CardBoxWidget.vue';
 import * as chartConfig from '../components/Charts/chart.config.js';
 import LineChart from '../components/Charts/LineChart.vue';
 import NotificationBar from '../components/NotificationBar.vue';
-import SectionBannerStarOnGitHub from '../components/SectionBannerStarOnGitHub.vue';
 import SectionMain from '../components/SectionMain.vue';
 import SectionTitleLineWithButton from '../components/SectionTitleLineWithButton.vue';
 import TableSampleClients from '../components/TableSampleClients.vue';
@@ -18,7 +17,6 @@ import {
   mdiCartOutline,
   mdiChartPie,
   mdiChartTimelineVariant,
-  mdiGithub,
   mdiMonitorCellphone,
   mdiReload,
 } from '@mdi/js';

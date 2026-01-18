@@ -1,13 +1,11 @@
 <script setup>
-import BaseButton from '../components/BaseButton.vue';
-import BaseDivider from '../components/BaseDivider.vue';
-import CardBox from '../components/CardBox.vue';
-import FormControl from '../components/FormControl.vue';
-import FormField from '../components/FormField.vue';
-import FormValidationErrors from '../components/FormValidationErrors.vue';
-import SectionFullScreen from '../components/SectionFullScreen.vue';
-import LayoutGuest from '../layouts/LayoutGuest.vue';
-import password from '@/routes/password';
+import BaseButton from '@/components/BaseButton.vue';
+import BaseDivider from '@/components/BaseDivider.vue';
+import CardBox from '@/components/CardBox.vue';
+import FormControl from '@/components/FormControl.vue';
+import FormField from '@/components/FormField.vue';
+import SectionFullScreen from '@/components/SectionFullScreen.vue';
+import LayoutGuest from '@/layouts/LayoutGuest.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 import { ref } from 'vue';
 
@@ -18,7 +16,7 @@ const form = useForm({
 const passwordInput = ref(null);
 
 const submit = () => {
-  form.post(password.confirm.store().url, {
+  form.post(route('password.confirm'), {
     onFinish: () => {
       form.reset();
 
@@ -34,7 +32,6 @@ const submit = () => {
 
     <SectionFullScreen v-slot="{ cardClass }" bg="purplePink">
       <CardBox :class="cardClass" is-form @submit.prevent="submit">
-        <FormValidationErrors />
 
         <FormField>
           <div class="mb-4 text-sm text-gray-600">
@@ -47,6 +44,7 @@ const submit = () => {
           label="Password"
           label-for="password"
           help="Please enter your password to confirm"
+          :error="form.errors.password"
         >
           <FormControl
             id="password"

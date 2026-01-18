@@ -1,15 +1,13 @@
 <script setup>
-import BaseButton from '../components/BaseButton.vue';
-import BaseButtons from '../components/BaseButtons.vue';
-import BaseDivider from '../components/BaseDivider.vue';
-import CardBox from '../components/CardBox.vue';
-import FormControl from '../components/FormControl.vue';
-import FormField from '../components/FormField.vue';
-import FormValidationErrors from '../components/FormValidationErrors.vue';
-import SectionFullScreen from '../components/SectionFullScreen.vue';
-import LayoutGuest from '../layouts/LayoutGuest.vue';
-import { login } from '@/routes';
-import register from '@/routes/register';
+import BaseButton from '@/components/BaseButton.vue';
+import BaseButtons from '@/components/BaseButtons.vue';
+import BaseDivider from '@/components/BaseDivider.vue';
+import CardBox from '@/components/CardBox.vue';
+import FormControl from '@/components/FormControl.vue';
+import FormField from '@/components/FormField.vue';
+import NotificationBarInCard from '@/components/NotificationBarInCard.vue';
+import SectionFullScreen from '@/components/SectionFullScreen.vue';
+import LayoutGuest from '@/layouts/LayoutGuest.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 import { mdiAccount, mdiEmail, mdiFormTextboxPassword } from '@mdi/js';
 
@@ -26,7 +24,7 @@ const submit = () => {
       ...data,
       terms: form.terms && form.terms.length,
     }))
-    .post(register.store().url, {
+    .post(route('register'), {
       onFinish: () => form.reset('password', 'password_confirmation'),
     });
 };
@@ -38,7 +36,9 @@ const submit = () => {
 
     <SectionFullScreen v-slot="{ cardClass }" bg="purplePink">
       <CardBox :class="cardClass" class="my-24" is-form @submit.prevent="submit">
-        <FormValidationErrors />
+        <NotificationBarInCard color="info">
+          No pressure. Just your entire identity.
+        </NotificationBarInCard>
 
         <FormField label="Name" label-for="name" help="Please enter your name">
           <FormControl
@@ -98,7 +98,7 @@ const submit = () => {
             :class="{ 'opacity-25': form.processing }"
             :disabled="form.processing"
           />
-          <BaseButton :route="login()" color="info" outline label="Login" />
+          <BaseButton :href="route('login')" color="info" outline label="Login" />
         </BaseButtons>
       </CardBox>
     </SectionFullScreen>
