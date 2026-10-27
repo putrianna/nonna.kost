@@ -48,7 +48,7 @@ const menuClick = (event) => {
       :is="item.to ? Link : 'a'"
       v-slot="vSlot"
       :to="item.to ?? 'undefined'"
-      :href="item.href ?? 'undefined'"
+      :href="item.to ?? item.href ?? '#'"
       :target="item.target ?? null"
       class="flex cursor-pointer"
       :class="componentClass"

@@ -15,9 +15,13 @@ const pinia = createPinia()
 createInertiaApp({
   title: (title) => (title ? `${title} - ${appName}` : appName),
 
-  // Breeze uses ./Pages (capital P). Keep it unless you want to rename folders.
   resolve: (name) =>
-    resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob('./Pages/**/*.vue')),
+    resolvePageComponent(`./pages/${name}.vue`, import.meta.glob([
+      './pages/**/*.vue',
+      // These unused starter-kit screens require a two-factor backend not installed here.
+      '!./pages/Auth/TwoFactorChallenge.vue',
+      '!./pages/Settings/TwoFactor.vue',
+    ])),
 
   setup({ el, App, props, plugin }) {
     const vueApp = createApp({ render: () => h(App, props) })
